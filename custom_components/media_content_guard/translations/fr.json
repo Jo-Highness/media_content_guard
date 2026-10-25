@@ -1,0 +1,175 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Media Content Guard – nouvelle règle",
+        "description": "Tenez les contenus indésirables à l'écart de vos enceintes. Choisissez les lecteurs à surveiller et saisissez les mots-clés à bloquer. Dès qu'un de ces lecteurs joue un contenu dont le titre, l'album, l'artiste (ou une autre information choisie) contient un mot-clé, la lecture est arrêtée.",
+        "data": {
+          "name": "Nom de la règle",
+          "players": "Lecteurs surveillés",
+          "keywords": "Liste de blocage (un mot-clé par ligne)",
+          "fields": "Vérifier ces informations"
+        },
+        "data_description": {
+          "name": "Affiché comme nom de l'appareil et utilisé par les actions (p. ex. `Salon` ou `Contenus enfants`). Doit être unique.",
+          "players": "Un ou plusieurs lecteurs. Un lecteur peut aussi faire partie de plusieurs règles.",
+          "keywords": "Majuscules et minuscules sont indifférentes et une partie du mot suffit : `bibi` bloque aussi « Bibi Blocksberg ». Les lignes vides sont ignorées.",
+          "fields": "Informations multimédia dans lesquelles les mots-clés sont recherchés. Titre, album, artiste et ID de contenu couvrent presque tout."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Veuillez saisir un nom.",
+      "no_players": "Sélectionnez au moins un lecteur.",
+      "no_keywords": "Saisissez au moins un mot-clé.",
+      "no_fields": "Sélectionnez au moins une information à vérifier."
+    },
+    "abort": {
+      "already_configured": "Une règle portant ce nom existe déjà."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Modifier la règle",
+        "description": "Modifiez les lecteurs surveillés et la liste de blocage. Les modifications s'appliquent immédiatement : ce qui est en cours de lecture est vérifié à nouveau aussitôt.",
+        "data": {
+          "name": "Nom de la règle",
+          "players": "Lecteurs surveillés",
+          "keywords": "Liste de blocage (un mot-clé par ligne)",
+          "fields": "Vérifier ces informations"
+        },
+        "data_description": {
+          "name": "Renommer conserve les ID d'entité existants.",
+          "players": "Un ou plusieurs lecteurs. Un lecteur peut aussi faire partie de plusieurs règles.",
+          "keywords": "Majuscules et minuscules sont indifférentes et une partie du mot suffit : `bibi` bloque aussi « Bibi Blocksberg ». Les lignes vides sont ignorées.",
+          "fields": "Informations multimédia dans lesquelles les mots-clés sont recherchés. Titre, album, artiste et ID de contenu couvrent presque tout."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Veuillez saisir un nom.",
+      "name_in_use": "Une autre règle utilise déjà ce nom.",
+      "no_players": "Sélectionnez au moins un lecteur.",
+      "no_keywords": "Saisissez au moins un mot-clé.",
+      "no_fields": "Sélectionnez au moins une information à vérifier."
+    }
+  },
+  "selector": {
+    "fields": {
+      "options": {
+        "media_title": "Titre",
+        "media_album_name": "Album / livre audio",
+        "media_artist": "Artiste",
+        "media_content_id": "ID de contenu (URL du flux ou du fichier)",
+        "media_playlist": "Playlist",
+        "media_series_title": "Série",
+        "media_channel": "Chaîne / station",
+        "app_name": "Application",
+        "source": "Source"
+      }
+    }
+  },
+  "services": {
+    "add_keyword": {
+      "name": "Ajouter un mot-clé",
+      "description": "Ajoute un ou plusieurs mots-clés à la liste de blocage d'une règle. Ce qui est en cours de lecture est vérifié à nouveau aussitôt.",
+      "fields": {
+        "rule": {
+          "name": "Règle",
+          "description": "Nom de la règle. Vous pouvez aussi choisir l'entrée de configuration."
+        },
+        "config_entry_id": {
+          "name": "Règle (entrée de configuration)",
+          "description": "L'entrée Media Content Guard. Reste valable si la règle est renommée."
+        },
+        "keyword": {
+          "name": "Mot-clé",
+          "description": "Mot-clé ou liste de mots-clés à bloquer."
+        }
+      }
+    },
+    "remove_keyword": {
+      "name": "Retirer un mot-clé",
+      "description": "Retire un ou plusieurs mots-clés de la liste de blocage d'une règle.",
+      "fields": {
+        "rule": {
+          "name": "Règle",
+          "description": "Nom de la règle. Vous pouvez aussi choisir l'entrée de configuration."
+        },
+        "config_entry_id": {
+          "name": "Règle (entrée de configuration)",
+          "description": "L'entrée Media Content Guard. Reste valable si la règle est renommée."
+        },
+        "keyword": {
+          "name": "Mot-clé",
+          "description": "Mot-clé ou liste de mots-clés à autoriser de nouveau (majuscules indifférentes)."
+        }
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "active": {
+        "name": "Liste de blocage active",
+        "state_attributes": {
+          "players": {
+            "name": "Lecteurs"
+          },
+          "keyword_count": {
+            "name": "Nombre de mots-clés"
+          }
+        }
+      }
+    },
+    "sensor": {
+      "last_blocked": {
+        "name": "Dernier blocage",
+        "state_attributes": {
+          "player": {
+            "name": "Lecteur"
+          },
+          "matched_keyword": {
+            "name": "Mot-clé"
+          },
+          "matched_field": {
+            "name": "Trouvé dans"
+          },
+          "media_title": {
+            "name": "Titre"
+          },
+          "media_artist": {
+            "name": "Artiste"
+          },
+          "media_album_name": {
+            "name": "Album"
+          }
+        }
+      },
+      "blocked_count": {
+        "name": "Lectures arrêtées",
+        "unit_of_measurement": "fois"
+      }
+    }
+  },
+  "exceptions": {
+    "rule_not_found": {
+      "message": "Aucune règle Media Content Guard ne s'appelle « {rule} »."
+    },
+    "entry_not_found": {
+      "message": "Aucune entrée Media Content Guard avec l'ID {entry_id} n'existe."
+    },
+    "entry_not_loaded": {
+      "message": "La règle Media Content Guard « {name} » n'est pas chargée."
+    },
+    "keyword_not_found": {
+      "message": "La liste de blocage de « {name} » ne contient pas « {keyword} »."
+    }
+  },
+  "issues": {
+    "missing_players": {
+      "title": "Media Content Guard : lecteurs manquants pour {name}",
+      "description": "La règle **{name}** surveille des lecteurs qui n'existent plus : {entities}\n\nCes lecteurs **ne sont pas protégés**. Si vous avez renommé ou remplacé une enceinte, ouvrez **Paramètres → Appareils et services → Media Content Guard → {name} → Configurer** et choisissez les lecteurs actuels."
+    }
+  }
+}

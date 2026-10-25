@@ -1,0 +1,19 @@
+{
+  "domain": "media_content_guard",
+  "name": "Media Content Guard",
+  "after_dependencies": [
+    "logbook",
+    "media_player"
+  ],
+  "codeowners": [
+    "@Jo-Highness"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Jo-Highness/media_content_guard",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/Jo-Highness/media_content_guard/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

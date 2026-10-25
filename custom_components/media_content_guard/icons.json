@@ -1,0 +1,28 @@
+{
+  "entity": {
+    "switch": {
+      "active": {
+        "default": "mdi:shield-lock",
+        "state": {
+          "off": "mdi:shield-off-outline"
+        }
+      }
+    },
+    "sensor": {
+      "last_blocked": {
+        "default": "mdi:music-note-off"
+      },
+      "blocked_count": {
+        "default": "mdi:counter"
+      }
+    }
+  },
+  "services": {
+    "add_keyword": {
+      "service": "mdi:playlist-plus"
+    },
+    "remove_keyword": {
+      "service": "mdi:playlist-minus"
+    }
+  }
+}

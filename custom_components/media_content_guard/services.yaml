@@ -1,0 +1,33 @@
+add_keyword:
+  fields:
+    rule:
+      example: Living room
+      selector:
+        text:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: media_content_guard
+    keyword:
+      required: true
+      example: Bibi Blocksberg
+      selector:
+        text:
+          multiple: true
+
+remove_keyword:
+  fields:
+    rule:
+      example: Living room
+      selector:
+        text:
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: media_content_guard
+    keyword:
+      required: true
+      example: Bibi Blocksberg
+      selector:
+        text:
+          multiple: true

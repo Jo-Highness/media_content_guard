@@ -1,0 +1,175 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Media Content Guard – new rule",
+        "description": "Keep unwanted content off your speakers. Pick the media players to watch and enter the keywords to block. As soon as one of these players plays something whose title, album, artist (or other selected details) contains a keyword, playback is stopped.",
+        "data": {
+          "name": "Name of the rule",
+          "players": "Media players to watch",
+          "keywords": "Blocklist (one keyword per line)",
+          "fields": "Check these details"
+        },
+        "data_description": {
+          "name": "Shown as device name and used by the actions (e.g. `Living room` or `Kids content`). Must be unique.",
+          "players": "One or more players. A player may also be part of several rules.",
+          "keywords": "Upper/lower case does not matter and parts of words are enough: `bibi` also blocks “Bibi Blocksberg”. Empty lines are ignored.",
+          "fields": "Media details that are searched for the keywords. Title, album, artist and content ID cover almost everything."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Please enter a name.",
+      "no_players": "Select at least one media player.",
+      "no_keywords": "Enter at least one keyword.",
+      "no_fields": "Select at least one detail to check."
+    },
+    "abort": {
+      "already_configured": "A rule with this name already exists."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Edit rule",
+        "description": "Change the watched players and the blocklist. Changes apply immediately – content that is already playing is checked again right away.",
+        "data": {
+          "name": "Name of the rule",
+          "players": "Media players to watch",
+          "keywords": "Blocklist (one keyword per line)",
+          "fields": "Check these details"
+        },
+        "data_description": {
+          "name": "Renaming keeps the existing entity IDs.",
+          "players": "One or more players. A player may also be part of several rules.",
+          "keywords": "Upper/lower case does not matter and parts of words are enough: `bibi` also blocks “Bibi Blocksberg”. Empty lines are ignored.",
+          "fields": "Media details that are searched for the keywords. Title, album, artist and content ID cover almost everything."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Please enter a name.",
+      "name_in_use": "Another rule already uses this name.",
+      "no_players": "Select at least one media player.",
+      "no_keywords": "Enter at least one keyword.",
+      "no_fields": "Select at least one detail to check."
+    }
+  },
+  "selector": {
+    "fields": {
+      "options": {
+        "media_title": "Title",
+        "media_album_name": "Album / audiobook",
+        "media_artist": "Artist",
+        "media_content_id": "Content ID (stream or file URL)",
+        "media_playlist": "Playlist",
+        "media_series_title": "Series",
+        "media_channel": "Channel / station",
+        "app_name": "App",
+        "source": "Source"
+      }
+    }
+  },
+  "services": {
+    "add_keyword": {
+      "name": "Add keyword",
+      "description": "Adds one or more keywords to the blocklist of a rule. Content that is playing right now is checked again immediately.",
+      "fields": {
+        "rule": {
+          "name": "Rule",
+          "description": "Name of the rule. Alternatively choose the config entry."
+        },
+        "config_entry_id": {
+          "name": "Rule (config entry)",
+          "description": "The Media Content Guard entry. Stays valid when the rule is renamed."
+        },
+        "keyword": {
+          "name": "Keyword",
+          "description": "Keyword or list of keywords to block."
+        }
+      }
+    },
+    "remove_keyword": {
+      "name": "Remove keyword",
+      "description": "Removes one or more keywords from the blocklist of a rule.",
+      "fields": {
+        "rule": {
+          "name": "Rule",
+          "description": "Name of the rule. Alternatively choose the config entry."
+        },
+        "config_entry_id": {
+          "name": "Rule (config entry)",
+          "description": "The Media Content Guard entry. Stays valid when the rule is renamed."
+        },
+        "keyword": {
+          "name": "Keyword",
+          "description": "Keyword or list of keywords to allow again (upper/lower case does not matter)."
+        }
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "active": {
+        "name": "Blocklist active",
+        "state_attributes": {
+          "players": {
+            "name": "Players"
+          },
+          "keyword_count": {
+            "name": "Number of keywords"
+          }
+        }
+      }
+    },
+    "sensor": {
+      "last_blocked": {
+        "name": "Last blocked",
+        "state_attributes": {
+          "player": {
+            "name": "Player"
+          },
+          "matched_keyword": {
+            "name": "Keyword"
+          },
+          "matched_field": {
+            "name": "Found in"
+          },
+          "media_title": {
+            "name": "Title"
+          },
+          "media_artist": {
+            "name": "Artist"
+          },
+          "media_album_name": {
+            "name": "Album"
+          }
+        }
+      },
+      "blocked_count": {
+        "name": "Blocked plays",
+        "unit_of_measurement": "times"
+      }
+    }
+  },
+  "exceptions": {
+    "rule_not_found": {
+      "message": "No Media Content Guard rule is called {rule}."
+    },
+    "entry_not_found": {
+      "message": "No Media Content Guard entry with ID {entry_id} exists."
+    },
+    "entry_not_loaded": {
+      "message": "The Media Content Guard rule {name} is not loaded."
+    },
+    "keyword_not_found": {
+      "message": "The blocklist of {name} does not contain {keyword}."
+    }
+  },
+  "issues": {
+    "missing_players": {
+      "title": "Media Content Guard: players missing for {name}",
+      "description": "The rule **{name}** watches media players that no longer exist: {entities}\n\nThese players are **not protected**. If you renamed or replaced a speaker, open **Settings → Devices & services → Media Content Guard → {name} → Configure** and select the current players."
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Media Content Guard – nueva regla",
+        "description": "Mantén el contenido no deseado lejos de tus altavoces. Elige los reproductores que quieres vigilar e introduce las palabras clave bloqueadas. En cuanto uno de ellos reproduzca algo cuyo título, álbum, artista (u otro dato seleccionado) contenga una palabra clave, la reproducción se detiene.",
+        "data": {
+          "name": "Nombre de la regla",
+          "players": "Reproductores vigilados",
+          "keywords": "Lista de bloqueo (una palabra clave por línea)",
+          "fields": "Comprobar estos datos"
+        },
+        "data_description": {
+          "name": "Se muestra como nombre del dispositivo y lo usan las acciones (p. ej. `Salón` o `Contenido infantil`). Debe ser único.",
+          "players": "Uno o varios reproductores. Un reproductor también puede pertenecer a varias reglas.",
+          "keywords": "No distingue mayúsculas y minúsculas y basta con parte de la palabra: `bibi` también bloquea «Bibi Blocksberg». Las líneas vacías se ignoran.",
+          "fields": "Datos multimedia en los que se buscan las palabras clave. Título, álbum, artista e ID de contenido cubren casi todo."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Introduce un nombre.",
+      "no_players": "Selecciona al menos un reproductor.",
+      "no_keywords": "Introduce al menos una palabra clave.",
+      "no_fields": "Selecciona al menos un dato a comprobar."
+    },
+    "abort": {
+      "already_configured": "Ya existe una regla con este nombre."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Editar regla",
+        "description": "Cambia los reproductores vigilados y la lista de bloqueo. Los cambios se aplican de inmediato: lo que suena ahora se vuelve a comprobar al instante.",
+        "data": {
+          "name": "Nombre de la regla",
+          "players": "Reproductores vigilados",
+          "keywords": "Lista de bloqueo (una palabra clave por línea)",
+          "fields": "Comprobar estos datos"
+        },
+        "data_description": {
+          "name": "Al renombrar se conservan los ID de entidad existentes.",
+          "players": "Uno o varios reproductores. Un reproductor también puede pertenecer a varias reglas.",
+          "keywords": "No distingue mayúsculas y minúsculas y basta con parte de la palabra: `bibi` también bloquea «Bibi Blocksberg». Las líneas vacías se ignoran.",
+          "fields": "Datos multimedia en los que se buscan las palabras clave. Título, álbum, artista e ID de contenido cubren casi todo."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Introduce un nombre.",
+      "name_in_use": "Otra regla ya usa este nombre.",
+      "no_players": "Selecciona al menos un reproductor.",
+      "no_keywords": "Introduce al menos una palabra clave.",
+      "no_fields": "Selecciona al menos un dato a comprobar."
+    }
+  },
+  "selector": {
+    "fields": {
+      "options": {
+        "media_title": "Título",
+        "media_album_name": "Álbum / audiolibro",
+        "media_artist": "Artista",
+        "media_content_id": "ID de contenido (URL de stream o archivo)",
+        "media_playlist": "Lista de reproducción",
+        "media_series_title": "Serie",
+        "media_channel": "Canal / emisora",
+        "app_name": "App",
+        "source": "Fuente"
+      }
+    }
+  },
+  "services": {
+    "add_keyword": {
+      "name": "Añadir palabra clave",
+      "description": "Añade una o varias palabras clave a la lista de bloqueo de una regla. Lo que suena ahora se vuelve a comprobar al instante.",
+      "fields": {
+        "rule": {
+          "name": "Regla",
+          "description": "Nombre de la regla. Como alternativa, elige la entrada de configuración."
+        },
+        "config_entry_id": {
+          "name": "Regla (entrada de configuración)",
+          "description": "La entrada de Media Content Guard. Sigue siendo válida si se renombra la regla."
+        },
+        "keyword": {
+          "name": "Palabra clave",
+          "description": "Palabra clave o lista de palabras clave a bloquear."
+        }
+      }
+    },
+    "remove_keyword": {
+      "name": "Quitar palabra clave",
+      "description": "Quita una o varias palabras clave de la lista de bloqueo de una regla.",
+      "fields": {
+        "rule": {
+          "name": "Regla",
+          "description": "Nombre de la regla. Como alternativa, elige la entrada de configuración."
+        },
+        "config_entry_id": {
+          "name": "Regla (entrada de configuración)",
+          "description": "La entrada de Media Content Guard. Sigue siendo válida si se renombra la regla."
+        },
+        "keyword": {
+          "name": "Palabra clave",
+          "description": "Palabra clave o lista de palabras clave que se vuelven a permitir (sin distinguir mayúsculas)."
+        }
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "active": {
+        "name": "Lista de bloqueo activa",
+        "state_attributes": {
+          "players": {
+            "name": "Reproductores"
+          },
+          "keyword_count": {
+            "name": "Número de palabras clave"
+          }
+        }
+      }
+    },
+    "sensor": {
+      "last_blocked": {
+        "name": "Último bloqueo",
+        "state_attributes": {
+          "player": {
+            "name": "Reproductor"
+          },
+          "matched_keyword": {
+            "name": "Palabra clave"
+          },
+          "matched_field": {
+            "name": "Encontrada en"
+          },
+          "media_title": {
+            "name": "Título"
+          },
+          "media_artist": {
+            "name": "Artista"
+          },
+          "media_album_name": {
+            "name": "Álbum"
+          }
+        }
+      },
+      "blocked_count": {
+        "name": "Reproducciones detenidas",
+        "unit_of_measurement": "veces"
+      }
+    }
+  },
+  "exceptions": {
+    "rule_not_found": {
+      "message": "No existe ninguna regla de Media Content Guard llamada «{rule}»."
+    },
+    "entry_not_found": {
+      "message": "No existe ninguna entrada de Media Content Guard con el ID {entry_id}."
+    },
+    "entry_not_loaded": {
+      "message": "La regla de Media Content Guard «{name}» no está cargada."
+    },
+    "keyword_not_found": {
+      "message": "La lista de bloqueo de «{name}» no contiene «{keyword}»."
+    }
+  },
+  "issues": {
+    "missing_players": {
+      "title": "Media Content Guard: faltan reproductores en {name}",
+      "description": "La regla **{name}** vigila reproductores que ya no existen: {entities}\n\nEstos reproductores **no están protegidos**. Si has renombrado o sustituido un altavoz, abre **Ajustes → Dispositivos y servicios → Media Content Guard → {name} → Configurar** y elige los reproductores actuales."
+    }
+  }
+}

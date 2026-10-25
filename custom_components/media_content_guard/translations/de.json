@@ -1,0 +1,175 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Media Content Guard – neue Regel",
+        "description": "Halte unerwünschte Inhalte von deinen Lautsprechern fern. Wähle die Media-Player, die überwacht werden sollen, und trage die Stichwörter ein, die gesperrt sind. Sobald einer dieser Player etwas abspielt, dessen Titel, Album, Interpret (oder ein anderes ausgewähltes Merkmal) ein Stichwort enthält, wird die Wiedergabe gestoppt.",
+        "data": {
+          "name": "Name der Regel",
+          "players": "Überwachte Media-Player",
+          "keywords": "Sperrliste (ein Stichwort pro Zeile)",
+          "fields": "Diese Angaben prüfen"
+        },
+        "data_description": {
+          "name": "Wird als Gerätename angezeigt und von den Aktionen verwendet (z. B. `Wohnzimmer` oder `Kinderinhalte`). Muss eindeutig sein.",
+          "players": "Ein oder mehrere Player. Ein Player darf auch zu mehreren Regeln gehören.",
+          "keywords": "Groß-/Kleinschreibung spielt keine Rolle, Wortteile genügen: `bibi` sperrt auch „Bibi Blocksberg“. Leere Zeilen werden ignoriert.",
+          "fields": "Medienangaben, in denen nach den Stichwörtern gesucht wird. Titel, Album, Interpret und Content-ID decken fast alles ab."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Bitte gib einen Namen ein.",
+      "no_players": "Wähle mindestens einen Media-Player aus.",
+      "no_keywords": "Trage mindestens ein Stichwort ein.",
+      "no_fields": "Wähle mindestens eine Angabe aus, die geprüft werden soll."
+    },
+    "abort": {
+      "already_configured": "Es gibt bereits eine Regel mit diesem Namen."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Regel bearbeiten",
+        "description": "Ändere die überwachten Player und die Sperrliste. Änderungen gelten sofort – was gerade läuft, wird direkt erneut geprüft.",
+        "data": {
+          "name": "Name der Regel",
+          "players": "Überwachte Media-Player",
+          "keywords": "Sperrliste (ein Stichwort pro Zeile)",
+          "fields": "Diese Angaben prüfen"
+        },
+        "data_description": {
+          "name": "Beim Umbenennen bleiben die bestehenden Entitäts-IDs erhalten.",
+          "players": "Ein oder mehrere Player. Ein Player darf auch zu mehreren Regeln gehören.",
+          "keywords": "Groß-/Kleinschreibung spielt keine Rolle, Wortteile genügen: `bibi` sperrt auch „Bibi Blocksberg“. Leere Zeilen werden ignoriert.",
+          "fields": "Medienangaben, in denen nach den Stichwörtern gesucht wird. Titel, Album, Interpret und Content-ID decken fast alles ab."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Bitte gib einen Namen ein.",
+      "name_in_use": "Eine andere Regel verwendet diesen Namen bereits.",
+      "no_players": "Wähle mindestens einen Media-Player aus.",
+      "no_keywords": "Trage mindestens ein Stichwort ein.",
+      "no_fields": "Wähle mindestens eine Angabe aus, die geprüft werden soll."
+    }
+  },
+  "selector": {
+    "fields": {
+      "options": {
+        "media_title": "Titel",
+        "media_album_name": "Album / Hörspiel",
+        "media_artist": "Interpret",
+        "media_content_id": "Content-ID (Stream- oder Datei-URL)",
+        "media_playlist": "Playlist",
+        "media_series_title": "Serie",
+        "media_channel": "Sender / Kanal",
+        "app_name": "App",
+        "source": "Quelle"
+      }
+    }
+  },
+  "services": {
+    "add_keyword": {
+      "name": "Stichwort hinzufügen",
+      "description": "Fügt der Sperrliste einer Regel ein oder mehrere Stichwörter hinzu. Was gerade läuft, wird sofort erneut geprüft.",
+      "fields": {
+        "rule": {
+          "name": "Regel",
+          "description": "Name der Regel. Alternativ den Konfigurationseintrag wählen."
+        },
+        "config_entry_id": {
+          "name": "Regel (Konfigurationseintrag)",
+          "description": "Der Media-Content-Guard-Eintrag. Bleibt auch nach dem Umbenennen der Regel gültig."
+        },
+        "keyword": {
+          "name": "Stichwort",
+          "description": "Stichwort oder Liste von Stichwörtern, die gesperrt werden sollen."
+        }
+      }
+    },
+    "remove_keyword": {
+      "name": "Stichwort entfernen",
+      "description": "Entfernt ein oder mehrere Stichwörter aus der Sperrliste einer Regel.",
+      "fields": {
+        "rule": {
+          "name": "Regel",
+          "description": "Name der Regel. Alternativ den Konfigurationseintrag wählen."
+        },
+        "config_entry_id": {
+          "name": "Regel (Konfigurationseintrag)",
+          "description": "Der Media-Content-Guard-Eintrag. Bleibt auch nach dem Umbenennen der Regel gültig."
+        },
+        "keyword": {
+          "name": "Stichwort",
+          "description": "Stichwort oder Liste von Stichwörtern, die wieder erlaubt werden (Groß-/Kleinschreibung egal)."
+        }
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "active": {
+        "name": "Sperrliste aktiv",
+        "state_attributes": {
+          "players": {
+            "name": "Player"
+          },
+          "keyword_count": {
+            "name": "Anzahl Stichwörter"
+          }
+        }
+      }
+    },
+    "sensor": {
+      "last_blocked": {
+        "name": "Zuletzt gesperrt",
+        "state_attributes": {
+          "player": {
+            "name": "Player"
+          },
+          "matched_keyword": {
+            "name": "Stichwort"
+          },
+          "matched_field": {
+            "name": "Gefunden in"
+          },
+          "media_title": {
+            "name": "Titel"
+          },
+          "media_artist": {
+            "name": "Interpret"
+          },
+          "media_album_name": {
+            "name": "Album"
+          }
+        }
+      },
+      "blocked_count": {
+        "name": "Gestoppte Wiedergaben",
+        "unit_of_measurement": "mal"
+      }
+    }
+  },
+  "exceptions": {
+    "rule_not_found": {
+      "message": "Es gibt keine Media-Content-Guard-Regel namens „{rule}“."
+    },
+    "entry_not_found": {
+      "message": "Es gibt keinen Media-Content-Guard-Eintrag mit der ID {entry_id}."
+    },
+    "entry_not_loaded": {
+      "message": "Die Media-Content-Guard-Regel „{name}“ ist nicht geladen."
+    },
+    "keyword_not_found": {
+      "message": "Die Sperrliste von „{name}“ enthält „{keyword}“ nicht."
+    }
+  },
+  "issues": {
+    "missing_players": {
+      "title": "Media Content Guard: Player fehlen bei {name}",
+      "description": "Die Regel **{name}** überwacht Media-Player, die es nicht mehr gibt: {entities}\n\nDiese Player sind **nicht geschützt**. Wenn du einen Lautsprecher umbenannt oder ersetzt hast, öffne **Einstellungen → Geräte & Dienste → Media Content Guard → {name} → Konfigurieren** und wähle die aktuellen Player aus."
+    }
+  }
+}

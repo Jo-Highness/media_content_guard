@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cache/
+*.egg-info/
+.venv/
+venv/
+.coverage
+htmlcov/
+.ruff_cache/
+
+run_tests.sh
+
+# Home Assistant runtime
+.storage/
+
+# Editor / OS artefacts
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
